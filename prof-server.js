@@ -1,4 +1,4 @@
-
+require("dotenv").config();
 var express = require("express");   //gives reference of header file
 var mysql = require("mysql");
 var path = require("path");
@@ -11,10 +11,10 @@ var app = express();               // function called and controls is now with a
 // const nodemailer=require("nodemailer")
 // const{google}=require("googleapis")
 
-// const clients_ID="1015605917485-ps0e26c0kbompu0igbprc65klbjjeais.apps.googleusercontent.com"
-// const clients_SECRET="b7Yx_15FLvfM5euPX3cZCoX7"
+// const clients_ID=process.env.CLIENT_ID;
+// const clients_SECRET=process.env.CLIENT_SECRET;
 // const REDIRECT_URI="https://developers.google.com/oauthplayground";
-// const REFRESH_TOKEN="1//04qZjGtNqVZNpCgYIARAAGAQSNwF-L9Ir1qY_mjK4fFRdfiDNAaWsSEEVdzL9Ve_xmZ1HfSeK0dgD23be45nDR1e4XlrVx_bPIgA";
+// const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 // const oAuth2clients= new google.auth.OAuth2(clients_ID,clients_SECRET,REDIRECT_URI)
 // oAuth2clients.setCredentials({refresh_token:REFRESH_TOKEN})
 
@@ -25,7 +25,7 @@ var app = express();               // function called and controls is now with a
 //     service:"gmail",
 //     auth:{
 //         type:"OAuth2",
-//         user: "ishika4462@gmail.com",
+//         user: process.env.GMAIL_USER;
 //         clientsId: clients_ID,
 //         clientsSecret:clients_SECRET,
 //         refreshToken:REFRESH_TOKEN,
@@ -34,8 +34,8 @@ var app = express();               // function called and controls is now with a
 // })
 
 // const mailOptions={
-//     from:"ishika🎀<ishika4462@gmail.com>",
-//     to:"ishikarajput1249@gmail.com",
+//     from:process.env.GMAIL_USER,
+//     to:process.env.GMAIL_RECEIVER,
 //     subject:"hey testing my nodemailer",
 //     text: "for my web app event manager",
 //      html:"<h1>hello from gmail using API</h1>", //optional
@@ -55,7 +55,7 @@ var app = express();               // function called and controls is now with a
 
 
 app.use(express.static("public"));  //to serve .css and .js files to clients behind the scene
-app.listen(6003, function () {     //port number is 6001 here
+app.listen(6003, function () {     //port number is 6003 here
     console.log("server started")
 })
 
@@ -109,10 +109,10 @@ app.use(express.urlencoded({ extended: true }));        //to convert Binary to J
 
 
 var dbConfig = {
-    host: "localhost",
-    user: "root",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
     password: "",
-    database: "nodejs"
+    database: process.env.DB_DATABASE
 }
 var dbcon = mysql.createConnection(dbConfig);
 dbcon.connect(function (err) {
